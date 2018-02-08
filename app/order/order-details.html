@@ -1,0 +1,47 @@
+<h2>{{title}}</h2>
+<div class="row">
+  <div class="col-md-6">
+    <p>Please review the details below</p>
+  </div>
+  <div class="col-md-6">
+    <button class="btn btn-primary" [ngClass]="tableView ? 'highlight' : ''" (click)="getTableView()">Table View</button>
+    <button class="btn btn-primary" [ngClass]="listView ? 'highlight' : ''" (click)="getListView()">List View</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-10">
+    <button class="btn btn-success" (click)="toggleImage()">{{showImage ? 'Hide Image' : 'Show Image' }}</button>
+  </div>
+</div>
+<div class="table-responsive order-table" *ngIf="orderDetails && orderDetails.length > 0 && tableView">
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Order #</th>
+        <th>Price</th>
+        <th>Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orderDetails">
+        <td><img [src]="order.imageUrl" class="order-image" *ngIf="showImage" /></td>
+        <td>{{order.productName}}</td>
+        <td>{{order.productCode}}</td>
+        <td>{{order.description}}</td>
+        <td>{{order.price}}</td>
+      </tr>
+    </tbody>
+
+  </table>
+</div>
+
+<div *ngIf="listView">
+  <ul class="list-group" *ngFor="let order of orderDetails">
+    <li class="list-group-item list-group-item-text"><img [src]="order.imageUrl" class="order-image" *ngIf="showImage" /></li>
+    <li class="list-group-item list-group-item-text">{{order.productName}}</li>
+    <li class="list-group-item list-group-item-text">{{order.productCode}}</li>
+    <li class="list-group-item list-group-item-text">{{order.description}}</li>
+    <li class="list-group-item list-group-item-text">{{order.price}}</li>
+  </ul>
+</div>
